@@ -1,7 +1,16 @@
 "use client";
+
+import { useSelector,useDispatch } from 'react-redux';
+import { deleteB,update } from '@/redux/slices/employees';
 import React from "react";
 import { useState } from "react";
-import Edit from "./edti";
+import AddEmployee from "./addEmployee";
+import AddButton from "./deletebutton";
+import UpdateButton from './updateButton';
+import CssLearning from './cssLearning';
+import Profile from './profile';
+import { profileName } from '@/redux/slices/profileHandler';
+
 
 interface Child {
   name: string;
@@ -9,9 +18,9 @@ interface Child {
   children: Child[]; // Array of nested children
 }
 
-function buildHierarchy(items: Child[]): Child[] {
+function buildHierarchy(items: any): Child[] {
   const map: { [key: string]: Child } = {};
-  const roots: Child[] = [];
+  const roots: any= [];
 
   // Step 1: Create a map of all items
   items.forEach((item: Child) => {
@@ -33,21 +42,32 @@ function buildHierarchy(items: Child[]): Child[] {
 }
 
 const Dropdown = ({ item }: { item: Child }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
+  const dispatch = useDispatch();
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
+  
+ const navigation=()=>{
+  dispatch(profileName(item.name));  
+ }
 
   return (
-    <div className="">
-      <div onClick={toggleDropdown} style={{ cursor: "pointer" }} >
-        {item.name} {item.children.length > 0 && (isOpen ? "▼" : "▶")}
+    <div className="border-b border-gray-200">
+      <div onClick={navigation} className="" >
+        {item.name} {item.children.length > 0 && (isOpen ?<button onClick={toggleDropdown}> "▼"</button> : <button onClick={toggleDropdown}> "▶"</button>)}
+        
+        {/* <AddButton key={item.name} NameV={item.name}/> */}
+         {/* <div> <UpdateButton key={item.name} NameV={item.name}/></div>  */}
       </div>
       {isOpen && item.children.length > 0 && (
         <div style={{ marginLeft: "20px" }}>
           {item.children.map((child, index) => (
-            <Dropdown key={index} item={child} />
+            <div key={child.name } className="">
+              <Dropdown key={child.name } item={child} />
+              
+            </div>
           ))}
         </div>
       )}
@@ -56,28 +76,33 @@ const Dropdown = ({ item }: { item: Child }) => {
 };
 
 const Hr = () => {
-  const [items, setItems] = useState<Child[]>([
-    { name: "ceo", parent: null, children: [] },
-    { name: "coo", parent: "ceo", children: [] },
-    { name: "cto", parent: "ceo", children: [] },
-    { name: "cfo", parent: "ceo", children: [] },
-    { name: "hr", parent: "ceo", children: [] },
-    { name: "chef", parent: "cfo", children: [] },
-    { name: "internal", parent: "cfo", children: [] },
-    { name: "iinternal", parent: "hr", children: [] },
-    { name: "internaliii", parent: "internal", children: [] },
-  ]);
-
-  const hierarchy: Child[] = buildHierarchy(items);
+ 
+  const dispatch=useDispatch();
+  const employees=useSelector((state:any)=>state.employees);
+  const hierarchy: Child[] = buildHierarchy(employees);
 
   return (
-    <div>
-      <div className="border border-4 justify-center place-self-center" >
+    <div className=' bg-transparent'>
+      <h1 className='flex items-center justify-center text-2xl font-semibold text-gray-800 p-8 bg bg-orange-200 w-full'>JOB Hierarchy</h1>
+      <div className='flex '>
+        {/* <div className="w-full flex justify-start border-4 border-black"> */}
+        <div className="w-fit basis-1/12 bg-white shadow-md max-w-xl bg-white rounded-lg overflow-hidden p-6 border-b border-gray-200 mt-1  " 
+      >
         {hierarchy.map((item, index) => (
-          <Dropdown key={index} item={item} />
+          <div className='border-b border-gray-200 ' key={index}>
+          
+          <Dropdown item={item} />
+         
+          </div>
         ))}
       </div>
-      <Edit/>
+        {/* </div> */}
+      <div className='  basis-11/12'>
+          <Profile />
+      </div>
+      </div>
+      {/* <div><AddEmployee/></div> */}
+      {/* <div><CssLearning/></div> */}
     </div>
   );
 };

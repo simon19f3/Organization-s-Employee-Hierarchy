@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {addPost, deletePost} from "@/redux/slices/postsSlice";
 import { useState } from "react";
 import React from 'react';
+import Dele from "./dele";
 
 function Posts() {
   const [title,setTitle]=useState("");
@@ -52,7 +53,7 @@ function Posts() {
           <div className="border-4" key={post.id}>
             <h3>{post.title}</h3>
             <p>{post.description}</p>
-            <button className="bg-red-600" onClick={()=>handleRemovePost(post.id)}>delete</button>
+            <div><button className="bg-red-600" onClick={()=>handleRemovePost(post.id)}>delete</button></div>
           </div>
         ))
        ):(

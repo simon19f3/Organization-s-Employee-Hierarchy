@@ -1,0 +1,15 @@
+import { createSlice,PayloadAction } from "@reduxjs/toolkit";
+const initialState: any ="ceo";
+const profilesSlice= createSlice({
+    name:"profile",
+    initialState,
+   reducers: {
+        profileName: (state, action: PayloadAction<string>) => {
+          
+          return action.payload;
+        },
+       
+    }
+})
+export const {profileName}=profilesSlice.actions;
+export default profilesSlice.reducer;
