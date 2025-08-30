@@ -1,10 +1,8 @@
 "use client";
 import { useSelector,useDispatch } from 'react-redux';
-import { deleteB,update,deleTwo } from '@/redux/slices/employees';
+import { deleteB,deleTwo } from '@/redux/slices/employees';
 import { useState } from 'react';
 import React from 'react'
-import AddEmployee from './addEmployee';
-import Profile from './profile';
 import { profileName } from '@/redux/slices/profileHandler';
 
 

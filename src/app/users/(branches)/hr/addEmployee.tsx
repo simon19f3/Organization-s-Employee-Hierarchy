@@ -28,27 +28,37 @@ function AddEmployee({NameV}:any) {
    } 
 
   return (
-    <div className='flex items-center justify-center w-3/12 place-self-center bg-green-200 text-2xl font-bold'> 
-    {display && <div className='flex'>  
+    <div className='flex items-center justify-center w-3/12 place-self-center bg-green-100 p-6 rounded-lg shadow-md text-2xl font-semibold'> 
+    {display && <div className='flex flex-col w-full gap-4'>  
      
-      <form >
+      <form className='flex flex-col gap-4'>
       <input 
-      placeholder='name'
+      placeholder='Name'
       type='text'
       value={name}
-      onChange={(e)=>setName(e.target.value)}/>
+      onChange={(e)=>setName(e.target.value)}
+      className='p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-400'/>
      <input 
-      placeholder='description'
+      placeholder='Description'
       type='text'
       value={description}
-      onChange={(e)=>setDescription(e.target.value)}/> 
-      <button onClick={handleForm}> submit</button>
+      onChange={(e)=>setDescription(e.target.value)}
+      className='p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-400'/> 
+      <button 
+      onClick={handleForm}
+      className='bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 transition duration-200'>
+      Submit
+      </button>
       </form>
       
       </div>}
-      {!display&& <button className='flex items-center justify-center w-3/12 place-self-center bg-green-200 text-2xl font-bold' onClick={handleVariable}>add</button>}
+      {!display && 
+      <button 
+      className='flex items-center justify-center w-full py-3 px-4 bg-green-500 text-white rounded-md text-xl font-semibold hover:bg-green-600 transition duration-200' 
+      onClick={handleVariable}>
+      Add
+      </button>}
      </div>
-    
-  )
+)
 }
 export default AddEmployee;
