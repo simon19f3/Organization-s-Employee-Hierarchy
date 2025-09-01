@@ -1,20 +1,20 @@
 "use client";
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { SunIcon, MoonIcon, XMarkIcon, Bars3Icon } from '@heroicons/react/24/outline';
+import {  XMarkIcon, Bars3Icon } from '@heroicons/react/24/outline';
 
 function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
   // Make theme a state so it can be changed
-  const [theme, setTheme] = useState("dark"); 
+  // const [theme, setTheme] = useState("dark"); 
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  const handleThemeToggle = () => {
-    setTheme(prevTheme => (prevTheme === "dark" ? "light" : "dark"));
-  };
+  // const handleThemeToggle = () => {
+  //   setTheme(prevTheme => (prevTheme === "dark" ? "light" : "dark"));
+  // };
 
   // A helper to close the menu when a link is clicked
   const handleMobileLinkClick = () => {
@@ -22,13 +22,13 @@ function Navigation() {
   };
   
   // A helper to handle theme toggle from mobile menu
-  const handleMobileThemeClick = () => {
-    handleThemeToggle();
-    setIsMobileMenuOpen(false);
-  };
+  // const handleMobileThemeClick = () => {
+  //   handleThemeToggle();
+  //   setIsMobileMenuOpen(false);
+  // };
 
   return (
-    <div className="bg-black border border-slate-600 round-md mb-7 text-white">
+    <div className="bg-black border border-slate-600 rounded-md mb-7 text-white">
       
       <div className='container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5'>
        

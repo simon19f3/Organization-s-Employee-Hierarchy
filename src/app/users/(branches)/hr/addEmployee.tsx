@@ -1,12 +1,20 @@
 "use client";
-import React from 'react';
-import { useState } from "react";
+import React, { useState } from 'react';
 import { addB } from '@/redux/slices/employees';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
+
+// Define interface for Employee (matches employees.ts)
+interface Employee {
+  name: string;
+  parent: string | null;
+  image: string;
+  description: string;
+  children: Employee[];
+}
 
 interface AddEmployeeProps {
   NameV: string;
-  className?: string; // Add this prop to accept classes from parent
+  className?: string; // Accept classes from parent
 }
 
 function AddEmployee({ NameV, className }: AddEmployeeProps) {
@@ -14,59 +22,60 @@ function AddEmployee({ NameV, className }: AddEmployeeProps) {
   const [description, setDescription] = useState("");
   const [display, setDisplay] = useState(false); // Controls visibility of the form
   const dispatch = useDispatch();
-  const employees = useSelector((state: any) => state.employees); // Kept for potential use
 
-  function handleAdd(e: React.FormEvent) { // Use React.FormEvent for form submission
+  function handleAdd(e: React.FormEvent) {
     e.preventDefault();
-    const newEmployee = {
-      name: name.trim(), // Trim whitespace
+    const newEmployee: Employee = {
+      name: name.trim(),
       parent: NameV,
-      children: []
+      image: "https://as1.ftcdn.net/jpg/01/80/80/28/1000_F_180802852_C3Zm4g9avBz5osPEA769dF0KKp5cQZYT.jpg", // Default image (same as initial state in employees.ts)
+      description: description.trim(), // Include description
+      children: [],
     };
 
-    if (newEmployee.name !== "") { // Ensure the name is not empty
+    if (newEmployee.name !== "") {
       dispatch(addB(newEmployee));
-      setName(""); // Clear the input field after submission
-      setDescription(""); // Clear the input field after submission
-      setDisplay(false); // Hide the form after submission
+      setName("");
+      setDescription("");
+      setDisplay(false);
     }
   }
 
   function handleDisplay() {
     setDisplay(!display);
-    setName(""); // Clear input when showing/hiding form
-    setDescription(""); // Clear description when showing/hiding form
+    setName("");
+    setDescription("");
   }
 
   return (
     <div>
       {display && (
-        <form onSubmit={handleAdd} className="flex flex-col space-y-3 p-4 bg-gray-800 rounded-lg shadow-inner"> {/* Styled form container */}
+        <form onSubmit={handleAdd} className="flex flex-col space-y-3 p-4 bg-gray-800 rounded-lg shadow-inner">
           <input
             type="text"
-            placeholder="Employee Name" // More descriptive placeholder
+            placeholder="Employee Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="p-2 border border-gray-600 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500" // Styled input
+            className="p-2 border border-gray-600 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <input
             type="text"
-            placeholder="Description" // Consistent placeholder
+            placeholder="Description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="p-2 border border-gray-600 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500" // Styled input
+            className="p-2 border border-gray-600 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
-          <div className="flex space-x-2"> {/* Container for form buttons */}
+          <div className="flex space-x-2">
             <button
               type="submit"
-              className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md transition-colors duration-200" // Styled submit button
+              className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md transition-colors duration-200"
             >
               Add Employee
             </button>
             <button
-              type="button" // Prevent unintended form submission
+              type="button"
               onClick={handleDisplay}
-              className="bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-md transition-colors duration-200" // Styled cancel button
+              className="bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-md transition-colors duration-200"
             >
               Cancel
             </button>
@@ -77,7 +86,7 @@ function AddEmployee({ NameV, className }: AddEmployeeProps) {
       {!display && (
         <button
           onClick={handleDisplay}
-          className={className || "bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-lg text-xl transition-colors duration-200 shadow-md"} // Apply passed className or use default
+          className={className || "bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-lg text-xl transition-colors duration-200 shadow-md"}
         >
           Add Employee
         </button>

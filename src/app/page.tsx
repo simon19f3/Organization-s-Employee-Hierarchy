@@ -1,7 +1,8 @@
 "use client";
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { FaEnvelope, FaLinkedinIn, FaPhone, FaVoicemail } from 'react-icons/fa';
+import Image from 'next/image';
+import { FaEnvelope, FaLinkedinIn, FaPhone} from 'react-icons/fa';
 import { FaLocationPin } from 'react-icons/fa6';
 
 function Home() {
@@ -58,11 +59,15 @@ function Home() {
             </Link>
           </div>
           <div>
-            <img
-              src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80"
-              alt="Employee Hierarchy"
-              className="w-full h-auto rounded-lg shadow-md"
-            />
+            
+            <Image
+        src="/photo-1504384308090-c894fdcc538d.avif"
+        alt="Sample"
+        width={500 }
+        height={500}
+        className="w-full h-auto rounded-lg shadow-md"
+      />
+
           </div>
         </div>
       </section>

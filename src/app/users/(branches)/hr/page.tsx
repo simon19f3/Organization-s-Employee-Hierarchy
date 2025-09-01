@@ -1,20 +1,32 @@
 "use client";
 
 import { useSelector, useDispatch } from 'react-redux';
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import Profile from './profile';
 import { profileName } from '@/redux/slices/profileHandler';
 
+// Define interface for Child (already provided in the original code)
 interface Child {
   name: string;
   parent: string | null; // `null` for root elements
   children: Child[]; // Array of nested children
 }
 
-function buildHierarchy(items: any): Child[] {
+// Define interface for Employee (same as Child, assuming employees match this structure)
+interface Employee {
+  name: string;
+  parent: string | null;
+  children: Child[];
+}
+
+// Define interface for Redux state
+interface RootState {
+  employees: Employee[];
+}
+
+function buildHierarchy(items: Employee[]): Child[] {
   const map: { [key: string]: Child } = {};
-  const roots: any = [];
+  const roots: Child[] = [];
 
   // Step 1: Create a map of all items
   items.forEach((item: Child) => {
@@ -46,7 +58,7 @@ const Dropdown = ({ item }: { item: Child }) => {
 
   const navigation = () => {
     dispatch(profileName(item.name));
-  }
+  };
 
   return (
     <div className="border-b border-gray-700">
@@ -63,7 +75,7 @@ const Dropdown = ({ item }: { item: Child }) => {
       </div>
       {isOpen && item.children.length > 0 && (
         <div className="ml-5">
-          {item.children.map((child, index) => (
+          {item.children.map((child) => (
             <div key={child.name}>
               <Dropdown item={child} />
             </div>
@@ -75,8 +87,7 @@ const Dropdown = ({ item }: { item: Child }) => {
 };
 
 const Hr = () => {
-  const dispatch = useDispatch();
-  const employees = useSelector((state: any) => state.employees);
+  const employees = useSelector((state: RootState) => state.employees);
   const hierarchy: Child[] = buildHierarchy(employees);
 
   return (
@@ -86,8 +97,8 @@ const Hr = () => {
       </h1>
       <div className="flex">
         <div className="w-fit min-w-[250px] max-w-[400px] bg-gray-900 shadow-lg rounded-lg overflow-hidden mt-1 p-4 border-r border-blue-700">
-          {hierarchy.map((item, index) => (
-            <div className="border-b border-gray-700" key={index}>
+          {hierarchy.map((item) => (
+            <div className="border-b border-gray-700" key={item.name}>
               <Dropdown item={item} />
             </div>
           ))}

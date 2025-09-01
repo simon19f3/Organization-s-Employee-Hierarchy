@@ -2,7 +2,7 @@
 import React from 'react';
 import { useState } from "react";
 import { update, updateFamily } from '@/redux/slices/employees'; // Assuming addB, deleTwo, deleteB are not used here
-import { useSelector, useDispatch } from 'react-redux';
+import {  useDispatch } from 'react-redux';
 import { profileName } from '@/redux/slices/profileHandler';
 
 interface UpdateButtonProps {
