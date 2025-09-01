@@ -49,22 +49,22 @@ const Dropdown = ({ item }: { item: Child }) => {
   }
 
   return (
-    <div className="border-b border-gray-700"> {/* Adjusted border color */}
+    <div className="border-b border-gray-700">
       <div
         onClick={navigation}
-        className="flex items-center justify-between p-2 cursor-pointer hover:bg-blue-800 text-blue-700 hover:text-white transition-colors duration-200" // Adjusted text, hover bg, and hover text color
+        className="flex items-center justify-between p-2 cursor-pointer hover:bg-blue-800 text-blue-700 hover:text-white transition-colors duration-200 w-full"
       >
-        <span className="font-medium">{item.name}</span>
+        <span className="font-medium text-ellipsis overflow-hidden whitespace-nowrap">{item.name}</span>
         {item.children.length > 0 && (
-          <button onClick={toggleDropdown} className="ml-2 text-blue-400 hover:text-white"> {/* Adjusted button color */}
+          <button onClick={toggleDropdown} className="ml-2 text-blue-400 hover:text-white flex-shrink-0">
             {isOpen ? "▼" : "▶"}
           </button>
         )}
       </div>
       {isOpen && item.children.length > 0 && (
-        <div style={{ marginLeft: "20px" }}>
+        <div className="ml-5">
           {item.children.map((child, index) => (
-            <div key={child.name} className="">
+            <div key={child.name}>
               <Dropdown item={child} />
             </div>
           ))}
@@ -80,19 +80,19 @@ const Hr = () => {
   const hierarchy: Child[] = buildHierarchy(employees);
 
   return (
-    <div className='bg-black text-blue-700 min-h-screen'> {/* Main background and text color */}
-      <h1 className='flex items-center justify-center text-3xl font-bold p-8 bg-blue-900 text-white w-full'> {/* Header styling */}
+    <div className="bg-black text-blue-700 min-h-screen">
+      <h1 className="flex items-center justify-center text-3xl font-bold p-8 bg-blue-900 text-white w-full">
         JOB Hierarchy
       </h1>
-      <div className='flex'>
-        <div className="w-fit basis-1/12 bg-gray-900 shadow-lg max-w-xl rounded-lg overflow-hidden mt-1 p-4 border-r border-blue-700"> {/* Hierarchy panel background, shadow, and border */}
+      <div className="flex">
+        <div className="w-fit min-w-[250px] max-w-[400px] bg-gray-900 shadow-lg rounded-lg overflow-hidden mt-1 p-4 border-r border-blue-700">
           {hierarchy.map((item, index) => (
-            <div className='border-b border-gray-700' key={index}> {/* Adjusted border color */}
+            <div className="border-b border-gray-700" key={index}>
               <Dropdown item={item} />
             </div>
           ))}
         </div>
-        <div className='basis-11/12 p-4'> {/* Padding for the profile section */}
+        <div className="flex-1 p-4">
           <Profile />
         </div>
       </div>

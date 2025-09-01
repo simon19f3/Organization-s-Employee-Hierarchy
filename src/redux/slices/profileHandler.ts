@@ -1,5 +1,5 @@
 import { createSlice,PayloadAction } from "@reduxjs/toolkit";
-const initialState: any ="ceo";
+const initialState: any ="CEO";
 const profilesSlice= createSlice({
     name:"profile",
     initialState,
