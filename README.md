@@ -1,36 +1,105 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Employee Hierarchy Management System
+Overview
+This is a Next.js-based web application designed to manage and visualize the organizational hierarchy of employees. The platform allows users to view the structure from CEO to entry-level positions, manage employee roles, and access individual employee profiles. The application features a clean, modern UI with responsive design and integrates icons from react-icons for an enhanced user experience.
+Features
 
-## Getting Started
+Visualize the organizational hierarchy from CEO to entry-level employees.
+Manage employee roles and responsibilities.
+Easy navigation through different levels of the organization.
+Profile management for each employee.
+Responsive design with a grid layout for various screen sizes.
+Contact information, office details, and news updates.
 
-First, run the development server:
+Technologies Used
 
-```bash
+Next.js: React framework for server-side rendering and static site generation.
+React: For building interactive UI components.
+React Icons: For including icons like FaLinkedinIn, FaPhone, etc.
+Tailwind CSS: For styling the application with utility-first CSS.
+Unsplash: For placeholder images.
+
+Prerequisites
+Before setting up the project, ensure you have the following installed:
+
+Node.js (v16 or higher)
+npm or yarn
+Git
+
+Setup Instructions
+
+Clone the Repository:
+git clone <repository-url>
+cd next_learning
+
+
+Install Dependencies:Using npm:
+npm install
+
+Or using yarn:
+yarn install
+
+
+Run the Development Server:
 npm run dev
-# or
+
+Or with yarn:
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The application will be available at http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Build for Production:
+npm run build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Then start the production server:
+npm start
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+pages/index.js: The main homepage component (Homepage) containing the UI for the Employee Hierarchy Management System.
+public/: Static assets like images .
+styles/: Global styles or Tailwind CSS configuration.
+components/: Reusable React components .
 
-## Deploy on Vercel
+Usage
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Navigate to the homepage (/) to view the introduction, mission, key features, and contact information.
+Click the "CEO" link to access the /users page (ensure this page exists or implement it).
+The footer section includes office details, news updates, and working hours.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Pushing to GitHub
+To push updates to GitHub:
+
+Initialize Git (if not already done):git init
+
+
+Stage and commit changes:git add .
+git commit -m "Update project"
+
+
+Link to your GitHub repository:git remote add origin <repository-url>
+
+
+Push to the main branch:git push -u origin main
+
+If you encounter a 408 timeout error, increase the Git buffer size:git config --global http.postBuffer 524288000
+
+Then retry the push.
+
+Contributing
+Contributions are welcome! Please follow these steps:
+
+Fork the repository.
+Create a new branch (git checkout -b feature-branch).
+Make your changes and commit (git commit -m "Add feature").
+Push to the branch (git push origin feature-branch).
+Open a pull request on GitHub.
+
+License
+This project is licensed under the MIT License.
+Contact
+For inquiries, reach out via:
+
+Email: simonassfaw@gmail.com
+
